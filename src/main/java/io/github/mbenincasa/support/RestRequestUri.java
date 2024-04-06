@@ -2,7 +2,7 @@ package io.github.mbenincasa.support;
 
 import java.net.URI;
 
-public interface RestClientRequestUri {
+public interface RestRequestUri {
 
     URI getUri();
 }

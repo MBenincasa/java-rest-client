@@ -1,7 +1,9 @@
 package io.github.mbenincasa.client;
 
+import io.github.mbenincasa.support.HttpHeaders;
 import io.github.mbenincasa.support.HttpMethod;
-import io.github.mbenincasa.support.RestClientRequestUri;
+import io.github.mbenincasa.support.RestRequestHeaders;
+import io.github.mbenincasa.support.RestRequestUri;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,8 +12,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
+import java.util.AbstractMap;
+import java.util.Iterator;
 
 public class DefaultRestClient implements RestClient {
 
@@ -25,9 +27,20 @@ public class DefaultRestClient implements RestClient {
         return new DefaultRestClientRequest(HttpMethod.POST);
     }
 
+    @Override
+    public RestClientRequestBodySpec put() {
+        return new DefaultRestClientRequest(HttpMethod.PUT);
+    }
+
+    @Override
+    public RestClientRequestSpec delete() {
+        return new DefaultRestClientRequest(HttpMethod.DELETE);
+    }
+
     private static class DefaultRestClientRequest implements RestClientRequestBodySpec {
 
         private URI uri;
+        private HttpHeaders httpHeaders;
         private final HttpMethod httpMethod;
 
         private DefaultRestClientRequest(HttpMethod httpMethod) {
@@ -35,8 +48,14 @@ public class DefaultRestClient implements RestClient {
         }
 
         @Override
-        public RestClientRequestSpec uri(RestClientRequestUri r) {
+        public RestClientRequestSpec uri(RestRequestUri r) {
             this.uri = r.getUri();
+            return this;
+        }
+
+        @Override
+        public RestClientRequestSpec headers(RestRequestHeaders r) {
+            this.httpHeaders = r.getHeaders();
             return this;
         }
 
@@ -50,6 +69,11 @@ public class DefaultRestClient implements RestClient {
             URL url = this.uri.toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(httpMethod.name());
+            Iterator<AbstractMap.SimpleEntry<String, String>> iteratorHeaders = this.httpHeaders.getAll();
+            while (iteratorHeaders.hasNext()) {
+                AbstractMap.SimpleEntry<String, String> header = iteratorHeaders.next();
+                connection.setRequestProperty(header.getKey(), header.getValue());
+            }
             connection.connect();
 
             return new DefaultRestClientResponse(connection);
@@ -60,13 +84,13 @@ public class DefaultRestClient implements RestClient {
     private static class DefaultRestClientResponse implements RestClientResponseSpec {
 
         private final int status;
-        private final Map<String, List<String>> headers;
+        private final HttpHeaders headers;
         private final InputStream body;
 
         private DefaultRestClientResponse(HttpURLConnection connection) throws IOException {
             this.status = connection.getResponseCode();
             this.body = connection.getInputStream();
-            this.headers = connection.getHeaderFields();
+            this.headers = this.setHttpHeaders(connection);
         }
 
         @Override
@@ -75,7 +99,7 @@ public class DefaultRestClient implements RestClient {
         }
 
         @Override
-        public Map<String, List<String>> getHeaders() {
+        public HttpHeaders getHeaders() {
             return this.headers;
         }
 
@@ -94,6 +118,10 @@ public class DefaultRestClient implements RestClient {
                 }
                 return content.toString();
             }
+        }
+
+        private HttpHeaders setHttpHeaders(HttpURLConnection connection) {
+            return new HttpHeaders(connection.getHeaderFields());
         }
     }
 }
