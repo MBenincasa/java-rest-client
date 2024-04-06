@@ -1,9 +1,6 @@
 package io.github.mbenincasa.client;
 
-import io.github.mbenincasa.support.HttpHeaders;
-import io.github.mbenincasa.support.HttpMethod;
-import io.github.mbenincasa.support.RestRequestHeaders;
-import io.github.mbenincasa.support.RestRequestUri;
+import io.github.mbenincasa.support.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +9,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.util.AbstractMap;
 import java.util.Iterator;
 
 public class DefaultRestClient implements RestClient {
@@ -69,10 +65,10 @@ public class DefaultRestClient implements RestClient {
             URL url = this.uri.toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod(httpMethod.name());
-            Iterator<AbstractMap.SimpleEntry<String, String>> iteratorHeaders = this.httpHeaders.getAll();
-            while (iteratorHeaders.hasNext()) {
-                AbstractMap.SimpleEntry<String, String> header = iteratorHeaders.next();
-                connection.setRequestProperty(header.getKey(), header.getValue());
+            Iterator<HttpHeader> headersIterator = this.httpHeaders.getAll();
+            while (headersIterator.hasNext()) {
+                HttpHeader header = headersIterator.next();
+                connection.setRequestProperty(header.getName(), header.getValue());
             }
             connection.connect();
 

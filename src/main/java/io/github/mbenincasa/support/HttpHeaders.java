@@ -5,50 +5,43 @@ import java.util.*;
 
 public class HttpHeaders {
 
-    private final Map<String, List<String>> headers;
+    private final List<HttpHeader> headers;
 
     public HttpHeaders() {
-        this.headers = new LinkedHashMap<>();
+        this.headers = new LinkedList<>();
     }
 
     public HttpHeaders(Map<String, List<String>> headers) {
-        this.headers = headers;
+        this();
+        headers.forEach((headerName, headerValues) -> {
+            if (headerValues != null && !headerValues.isEmpty()) {
+                add(headerName, headerValues.get(0));
+            }
+        });
     }
 
     public void add(String headerName, String headerValue) {
-        List<String> headerValues = this.containsHeader(headerName)
-                ? this.headers.get(headerName)
-                : new LinkedList<>();
-        headerValues.add(headerValue);
-        this.headers.put(headerName, headerValues);
+        if (headerName == null)
+            return;
+
+        this.headers.removeIf(header -> header.getName().equalsIgnoreCase(headerName));
+        this.headers.add(new HttpHeader(headerName, headerValue));
     }
 
     public boolean containsHeader(String headerName) {
-        return this.headers.containsKey(headerName);
+        return this.headers.stream()
+                .anyMatch(header -> header.getName().equalsIgnoreCase(headerName));
     }
 
-    public List<String> get(String headerName) {
-        if (!containsHeader(headerName))
-            return null;
-
-        return this.headers.get(headerName);
+    public String get(String headerName) {
+        Optional<String> headerValue = this.headers.stream()
+                .filter(header -> header.getName().equalsIgnoreCase(headerName))
+                .map(HttpHeader::getValue)
+                .findFirst();
+        return headerValue.orElse(null);
     }
 
-    public String getFirst(String headerName) {
-        List<String> headerValues = this.get(headerName);
-
-        return headerValues == null || headerValues.isEmpty()
-                ? null
-                : headerValues.get(0);
-    }
-
-    public Iterator<AbstractMap.SimpleEntry<String, String>> getAll() {
-        return this.headers.entrySet().stream()
-                .map(entry -> {
-                    String key = entry.getKey();
-                    String value = entry.getValue().isEmpty() ? null : entry.getValue().get(0);
-                    return new AbstractMap.SimpleEntry<>(key, value);
-                })
-                .iterator();
+    public Iterator<HttpHeader> getAll() {
+        return this.headers.iterator();
     }
 }
