@@ -1,5 +1,7 @@
 package io.github.mbenincasa.support;
 
+import io.github.mbenincasa.http.HttpHeaders;
+
 public class DefaultRestRequestHeaders implements RestRequestHeaders {
 
     private HttpHeaders httpHeaders;

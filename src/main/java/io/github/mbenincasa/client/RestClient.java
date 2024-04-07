@@ -1,6 +1,6 @@
 package io.github.mbenincasa.client;
 
-import io.github.mbenincasa.support.HttpHeaders;
+import io.github.mbenincasa.http.HttpHeaders;
 import io.github.mbenincasa.support.RestRequestHeaders;
 import io.github.mbenincasa.support.RestRequestUri;
 

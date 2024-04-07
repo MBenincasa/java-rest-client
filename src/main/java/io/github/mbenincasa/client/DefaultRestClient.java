@@ -1,5 +1,8 @@
 package io.github.mbenincasa.client;
 
+import io.github.mbenincasa.http.HttpHeader;
+import io.github.mbenincasa.http.HttpHeaders;
+import io.github.mbenincasa.http.HttpMethod;
 import io.github.mbenincasa.support.*;
 
 import java.io.BufferedReader;

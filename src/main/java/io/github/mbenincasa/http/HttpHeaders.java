@@ -1,5 +1,4 @@
-package io.github.mbenincasa.support;
-
+package io.github.mbenincasa.http;
 
 import java.util.*;
 
