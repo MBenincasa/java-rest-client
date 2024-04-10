@@ -3,6 +3,7 @@ package io.github.mbenincasa.client;
 import io.github.mbenincasa.http.HttpHeader;
 import io.github.mbenincasa.http.HttpHeaders;
 import io.github.mbenincasa.http.HttpMethod;
+import io.github.mbenincasa.http.HttpStatus;
 import io.github.mbenincasa.support.*;
 
 import java.io.BufferedReader;
@@ -82,18 +83,18 @@ public class DefaultRestClient implements RestClient {
 
     private static class DefaultRestClientResponse implements RestClientResponseSpec {
 
-        private final int status;
+        private final HttpStatus status;
         private final HttpHeaders headers;
         private final InputStream body;
 
         private DefaultRestClientResponse(HttpURLConnection connection) throws IOException {
-            this.status = connection.getResponseCode();
+            this.status = HttpStatus.fromValue(connection.getResponseCode());
             this.body = connection.getInputStream();
             this.headers = this.setHttpHeaders(connection);
         }
 
         @Override
-        public int getStatus() {
+        public HttpStatus getStatus() {
             return this.status;
         }
 

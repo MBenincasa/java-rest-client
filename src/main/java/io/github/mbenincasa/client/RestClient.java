@@ -1,6 +1,7 @@
 package io.github.mbenincasa.client;
 
 import io.github.mbenincasa.http.HttpHeaders;
+import io.github.mbenincasa.http.HttpStatus;
 import io.github.mbenincasa.support.RestRequestHeaders;
 import io.github.mbenincasa.support.RestRequestUri;
 
@@ -33,7 +34,7 @@ public interface RestClient {
 
     interface RestClientResponseSpec {
 
-        int getStatus() throws IOException;
+        HttpStatus getStatus() throws IOException;
 
         HttpHeaders getHeaders();
 
