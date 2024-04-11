@@ -1,5 +1,7 @@
 package io.github.mbenincasa.http;
 
+import java.util.Arrays;
+
 public enum MediaType {
 
     ALL("*/*"),
@@ -13,5 +15,15 @@ public enum MediaType {
 
     public String getValue() {
         return this.value;
+    }
+
+    public static MediaType get(String contentType) {
+        String[] parts = contentType.split(";");
+        String mainType = parts[0].trim();
+
+        return Arrays.stream(values())
+                .filter(mediaType -> mediaType.getValue().equalsIgnoreCase(mainType))
+                .findFirst()
+                .orElse(null);
     }
 }

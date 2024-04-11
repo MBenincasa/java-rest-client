@@ -1,15 +1,9 @@
 package io.github.mbenincasa.client;
 
-import io.github.mbenincasa.http.HttpHeader;
-import io.github.mbenincasa.http.HttpHeaders;
-import io.github.mbenincasa.http.HttpMethod;
-import io.github.mbenincasa.http.HttpStatus;
+import io.github.mbenincasa.http.*;
 import io.github.mbenincasa.support.*;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -42,6 +36,7 @@ public class DefaultRestClient implements RestClient {
         private URI uri;
         private HttpHeaders httpHeaders;
         private final HttpMethod httpMethod;
+        private Object body;
 
         private DefaultRestClientRequest(HttpMethod httpMethod) {
             this.httpMethod = httpMethod;
@@ -60,19 +55,25 @@ public class DefaultRestClient implements RestClient {
         }
 
         @Override
-        public RestClientRequestBodySpec body() {
-            return null;
+        public RestClientRequestBodySpec body(Object body) {
+            this.body = body;
+            return this;
         }
 
         @Override
         public RestClientResponseSpec retrieve() throws Exception {
             URL url = this.uri.toURL();
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod(httpMethod.name());
+            connection.setRequestMethod(this.httpMethod.name());
             Iterator<HttpHeader> headersIterator = this.httpHeaders.getAll();
             while (headersIterator.hasNext()) {
                 HttpHeader header = headersIterator.next();
                 connection.setRequestProperty(header.getName(), header.getValue());
+            }
+            if(this.body != null) {
+                connection.setDoOutput(true);
+                byte[] requestBody = RestBodyHandler.serialize(this.body, MediaType.get(this.httpHeaders.get("Content-Type")));
+                connection.getOutputStream().write(requestBody);
             }
             connection.connect();
 
@@ -85,11 +86,11 @@ public class DefaultRestClient implements RestClient {
 
         private final HttpStatus status;
         private final HttpHeaders headers;
-        private final InputStream body;
+        private final byte[] body;
 
         private DefaultRestClientResponse(HttpURLConnection connection) throws IOException {
             this.status = HttpStatus.fromValue(connection.getResponseCode());
-            this.body = connection.getInputStream();
+            this.body = connection.getInputStream().readAllBytes();
             this.headers = this.setHttpHeaders(connection);
         }
 
@@ -104,20 +105,13 @@ public class DefaultRestClient implements RestClient {
         }
 
         @Override
-        public InputStream getBodyStream() {
-            return this.body;
+        public <T> T getBody(Class<T> bodyType) throws IOException {
+            return RestBodyHandler.deserialize(this.body, bodyType, MediaType.get(this.getHeaders().get("Content-Type")));
         }
 
         @Override
-        public String getBodyString() throws IOException {
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(this.body))) {
-                StringBuilder content = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    content.append(line);
-                }
-                return content.toString();
-            }
+        public String getBodyAsString() throws IOException {
+            return RestBodyHandler.deserialize(this.body, MediaType.get(this.getHeaders().get("Content-Type")));
         }
 
         private HttpHeaders setHttpHeaders(HttpURLConnection connection) {

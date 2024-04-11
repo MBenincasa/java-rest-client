@@ -6,7 +6,6 @@ import io.github.mbenincasa.support.RestRequestHeaders;
 import io.github.mbenincasa.support.RestRequestUri;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 public interface RestClient {
 
@@ -29,7 +28,7 @@ public interface RestClient {
 
     interface RestClientRequestBodySpec extends RestClientRequestSpec {
 
-        RestClientRequestBodySpec body();
+        RestClientRequestBodySpec body(Object body);
     }
 
     interface RestClientResponseSpec {
@@ -38,8 +37,8 @@ public interface RestClient {
 
         HttpHeaders getHeaders();
 
-        InputStream getBodyStream() throws IOException;
+        <T> T getBody(Class<T> bodyType) throws IOException;
 
-        String getBodyString() throws IOException;
+        String getBodyAsString() throws IOException;
     }
 }
