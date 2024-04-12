@@ -8,24 +8,24 @@ import io.github.mbenincasa.support.RestRequestUri;
 
 public interface RestClient {
 
-    RestClientRequestSpec get();
+    RestClientRequestSpec<?> get();
 
     RestClientRequestBodySpec post();
 
     RestClientRequestBodySpec put();
 
-    RestClientRequestSpec delete();
+    RestClientRequestSpec<?> delete();
 
-    interface RestClientRequestSpec {
+    interface RestClientRequestSpec<S extends RestClientRequestSpec<?>> {
 
-        RestClientRequestSpec uri(RestRequestUri r);
+        S uri(RestRequestUri r);
 
-        RestClientRequestSpec headers(RestRequestHeaders r);
+        S headers(RestRequestHeaders r);
 
         RestClientResponseSpec retrieve() throws RestClientException;
     }
 
-    interface RestClientRequestBodySpec extends RestClientRequestSpec {
+    interface RestClientRequestBodySpec extends RestClientRequestSpec<RestClientRequestBodySpec> {
 
         RestClientRequestBodySpec body(Object body);
     }

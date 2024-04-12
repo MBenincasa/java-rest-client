@@ -12,7 +12,7 @@ import java.util.Iterator;
 public class DefaultRestClient implements RestClient {
 
     @Override
-    public RestClientRequestSpec get() {
+    public RestClientRequestSpec<?> get() {
         return new DefaultRestClientRequest(HttpMethod.GET);
     }
 
@@ -27,7 +27,7 @@ public class DefaultRestClient implements RestClient {
     }
 
     @Override
-    public RestClientRequestSpec delete() {
+    public RestClientRequestSpec<?> delete() {
         return new DefaultRestClientRequest(HttpMethod.DELETE);
     }
 
@@ -43,13 +43,13 @@ public class DefaultRestClient implements RestClient {
         }
 
         @Override
-        public RestClientRequestSpec uri(RestRequestUri r) {
+        public RestClientRequestBodySpec uri(RestRequestUri r) {
             this.uri = r.getUri();
             return this;
         }
 
         @Override
-        public RestClientRequestSpec headers(RestRequestHeaders r) {
+        public RestClientRequestBodySpec headers(RestRequestHeaders r) {
             this.httpHeaders = r.getHeaders();
             return this;
         }
