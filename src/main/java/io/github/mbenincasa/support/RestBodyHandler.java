@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.mbenincasa.http.MediaType;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public class RestBodyHandler {
@@ -21,16 +22,11 @@ public class RestBodyHandler {
         throw new RuntimeException();
     }
 
-    public static String deserialize(byte[] body, MediaType contentType) throws IOException {
+    public static String deserialize(byte[] body) {
         if (body == null || body.length == 0) {
             return null;
         }
-
-        if (Objects.requireNonNull(contentType) == MediaType.APPLICATION_JSON) {
-            Object jsonObject = objectMapper.readValue(body, Object.class);
-            return objectMapper.writeValueAsString(jsonObject);
-        }
-        throw new RuntimeException();
+        return new String(body, StandardCharsets.UTF_8);
     }
 
     public static byte[] serialize(Object body, MediaType contentType) throws JsonProcessingException {

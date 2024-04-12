@@ -1,11 +1,10 @@
 package io.github.mbenincasa.client;
 
+import io.github.mbenincasa.exception.RestClientException;
 import io.github.mbenincasa.http.HttpHeaders;
 import io.github.mbenincasa.http.HttpStatus;
 import io.github.mbenincasa.support.RestRequestHeaders;
 import io.github.mbenincasa.support.RestRequestUri;
-
-import java.io.IOException;
 
 public interface RestClient {
 
@@ -23,7 +22,7 @@ public interface RestClient {
 
         RestClientRequestSpec headers(RestRequestHeaders r);
 
-        RestClientResponseSpec retrieve() throws Exception;
+        RestClientResponseSpec retrieve() throws RestClientException;
     }
 
     interface RestClientRequestBodySpec extends RestClientRequestSpec {
@@ -33,12 +32,12 @@ public interface RestClient {
 
     interface RestClientResponseSpec {
 
-        HttpStatus getStatus() throws IOException;
+        HttpStatus getStatus();
 
         HttpHeaders getHeaders();
 
-        <T> T getBody(Class<T> bodyType) throws IOException;
+        <T> T getBody(Class<T> bodyType) throws RestClientException;
 
-        String getBodyAsString() throws IOException;
+        String getBodyAsString();
     }
 }

@@ -1,9 +1,9 @@
 package io.github.mbenincasa.client;
 
+import io.github.mbenincasa.exception.RestClientException;
 import io.github.mbenincasa.http.*;
 import io.github.mbenincasa.support.*;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -61,23 +61,27 @@ public class DefaultRestClient implements RestClient {
         }
 
         @Override
-        public RestClientResponseSpec retrieve() throws Exception {
-            URL url = this.uri.toURL();
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod(this.httpMethod.name());
-            Iterator<HttpHeader> headersIterator = this.httpHeaders.getAll();
-            while (headersIterator.hasNext()) {
-                HttpHeader header = headersIterator.next();
-                connection.setRequestProperty(header.getName(), header.getValue());
-            }
-            if(this.body != null) {
-                connection.setDoOutput(true);
-                byte[] requestBody = RestBodyHandler.serialize(this.body, MediaType.get(this.httpHeaders.get("Content-Type")));
-                connection.getOutputStream().write(requestBody);
-            }
-            connection.connect();
+        public RestClientResponseSpec retrieve() throws RestClientException {
+            try {
+                URL url = this.uri.toURL();
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod(this.httpMethod.name());
+                Iterator<HttpHeader> headersIterator = this.httpHeaders.getAll();
+                while (headersIterator.hasNext()) {
+                    HttpHeader header = headersIterator.next();
+                    connection.setRequestProperty(header.getName(), header.getValue());
+                }
+                if(this.body != null) {
+                    connection.setDoOutput(true);
+                    byte[] requestBody = RestBodyHandler.serialize(this.body, MediaType.get(this.httpHeaders.get("Content-Type")));
+                    connection.getOutputStream().write(requestBody);
+                }
+                connection.connect();
 
-            return new DefaultRestClientResponse(connection);
+                return new DefaultRestClientResponse(connection);
+            } catch (Exception e) {
+                throw new RestClientException(e.getMessage(), e.getCause());
+            }
         }
 
     }
@@ -88,10 +92,14 @@ public class DefaultRestClient implements RestClient {
         private final HttpHeaders headers;
         private final byte[] body;
 
-        private DefaultRestClientResponse(HttpURLConnection connection) throws IOException {
-            this.status = HttpStatus.fromValue(connection.getResponseCode());
-            this.body = connection.getInputStream().readAllBytes();
-            this.headers = this.setHttpHeaders(connection);
+        private DefaultRestClientResponse(HttpURLConnection connection) throws RestClientException {
+            try {
+                this.status = HttpStatus.fromValue(connection.getResponseCode());
+                this.body = connection.getInputStream().readAllBytes();
+                this.headers = this.setHttpHeaders(connection);
+            } catch (Exception e) {
+                throw new RestClientException(e.getMessage(), e.getCause());
+            }
         }
 
         @Override
@@ -105,13 +113,17 @@ public class DefaultRestClient implements RestClient {
         }
 
         @Override
-        public <T> T getBody(Class<T> bodyType) throws IOException {
-            return RestBodyHandler.deserialize(this.body, bodyType, MediaType.get(this.getHeaders().get("Content-Type")));
+        public <T> T getBody(Class<T> bodyType) throws RestClientException {
+            try {
+                return RestBodyHandler.deserialize(this.body, bodyType, MediaType.get(this.getHeaders().get("Content-Type")));
+            } catch (Exception e) {
+                throw new RestClientException(e.getMessage(), e.getCause());
+            }
         }
 
         @Override
-        public String getBodyAsString() throws IOException {
-            return RestBodyHandler.deserialize(this.body, MediaType.get(this.getHeaders().get("Content-Type")));
+        public String getBodyAsString() {
+            return RestBodyHandler.deserialize(this.body);
         }
 
         private HttpHeaders setHttpHeaders(HttpURLConnection connection) {
