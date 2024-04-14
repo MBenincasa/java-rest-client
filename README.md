@@ -6,6 +6,11 @@ Welcome to the Java REST Client Library! This library provides a convenient way 
 ## Minimum Requirements
 Java 17 or above.
 
+## Dependencies
+- com.fasterxml.jackson.core:jackson-databind:jar:2.17.0
+- org.junit.jupiter:junit-jupiter:jar:5.10.2
+- org.junit.platform:junit-platform-suite-engine:jar:1.10.2
+
 ## Contributing
 We welcome contributions from the community to improve this library. If you encounter any bugs, have feature requests, or want to contribute code, please open an issue or submit a pull request on GitHub.
 
