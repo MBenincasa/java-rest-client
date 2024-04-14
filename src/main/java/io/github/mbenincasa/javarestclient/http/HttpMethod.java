@@ -1,4 +1,4 @@
-package io.github.mbenincasa.support;
+package io.github.mbenincasa.javarestclient.http;
 
 public enum HttpMethod {
 
