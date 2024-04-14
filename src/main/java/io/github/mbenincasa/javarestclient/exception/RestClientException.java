@@ -1,4 +1,4 @@
-package io.github.mbenincasa.exception;
+package io.github.mbenincasa.javarestclient.exception;
 
 public class RestClientException extends Exception {
 

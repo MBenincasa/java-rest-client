@@ -1,4 +1,4 @@
-package io.github.mbenincasa.http;
+package io.github.mbenincasa.javarestclient.http;
 
 import java.util.*;
 

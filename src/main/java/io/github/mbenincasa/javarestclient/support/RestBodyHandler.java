@@ -1,8 +1,8 @@
-package io.github.mbenincasa.support;
+package io.github.mbenincasa.javarestclient.support;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.mbenincasa.http.MediaType;
+import io.github.mbenincasa.javarestclient.http.MediaType;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

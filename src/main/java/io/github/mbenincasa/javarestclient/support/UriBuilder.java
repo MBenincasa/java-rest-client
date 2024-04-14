@@ -1,4 +1,4 @@
-package io.github.mbenincasa.support;
+package io.github.mbenincasa.javarestclient.support;
 
 import java.net.URI;
 

@@ -1,8 +1,10 @@
-package io.github.mbenincasa.client;
+package io.github.mbenincasa.javarestclient.client;
 
-import io.github.mbenincasa.exception.RestClientException;
-import io.github.mbenincasa.http.*;
-import io.github.mbenincasa.support.*;
+import io.github.mbenincasa.javarestclient.exception.RestClientException;
+import io.github.mbenincasa.javarestclient.http.*;
+import io.github.mbenincasa.javarestclient.support.RestBodyHandler;
+import io.github.mbenincasa.javarestclient.support.RestRequestHeaders;
+import io.github.mbenincasa.javarestclient.support.RestRequestUri;
 
 import java.net.HttpURLConnection;
 import java.net.URI;

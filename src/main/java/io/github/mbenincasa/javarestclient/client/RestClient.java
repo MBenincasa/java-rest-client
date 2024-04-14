@@ -1,10 +1,10 @@
-package io.github.mbenincasa.client;
+package io.github.mbenincasa.javarestclient.client;
 
-import io.github.mbenincasa.exception.RestClientException;
-import io.github.mbenincasa.http.HttpHeaders;
-import io.github.mbenincasa.http.HttpStatus;
-import io.github.mbenincasa.support.RestRequestHeaders;
-import io.github.mbenincasa.support.RestRequestUri;
+import io.github.mbenincasa.javarestclient.exception.RestClientException;
+import io.github.mbenincasa.javarestclient.http.HttpHeaders;
+import io.github.mbenincasa.javarestclient.http.HttpStatus;
+import io.github.mbenincasa.javarestclient.support.RestRequestHeaders;
+import io.github.mbenincasa.javarestclient.support.RestRequestUri;
 
 public interface RestClient {
 

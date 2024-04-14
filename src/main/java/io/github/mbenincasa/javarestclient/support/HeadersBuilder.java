@@ -1,7 +1,7 @@
-package io.github.mbenincasa.support;
+package io.github.mbenincasa.javarestclient.support;
 
-import io.github.mbenincasa.http.HttpHeaders;
-import io.github.mbenincasa.http.MediaType;
+import io.github.mbenincasa.javarestclient.http.HttpHeaders;
+import io.github.mbenincasa.javarestclient.http.MediaType;
 
 public class HeadersBuilder {
 
