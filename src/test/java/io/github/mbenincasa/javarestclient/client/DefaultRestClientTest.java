@@ -82,12 +82,41 @@ class DefaultRestClientTest {
                         .build())
                 .headers(HeadersBuilder.create()
                         .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON)
                         .build())
                 .retrieve();
 
         assertNotNull(response);
         assertNull(response.getBodyAsString());
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatus());
+    }
+
+    @Test
+    public void testHeadRequest() throws RestClientException {
+        var response = restClient.head()
+                .uri(UriBuilder.create()
+                        .uri(URI.create("https://reqres.in/api/users/2"))
+                        .build())
+                .headers(HeadersBuilder.create()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .build())
+                .retrieve();
+
+        assertNotNull(response);
+        assertEquals(HttpStatus.OK, response.getStatus());
+    }
+
+    @Test
+    public void testOptionsRequest() throws RestClientException {
+        var response = restClient.options()
+                .uri(UriBuilder.create()
+                        .uri(URI.create("https://reqres.in/api/users/2"))
+                        .build())
+                .headers(HeadersBuilder.create()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .build())
+                .retrieve();
+
+        assertNotNull(response);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatus());
     }
 }

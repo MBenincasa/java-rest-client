@@ -16,6 +16,10 @@ public interface RestClient {
 
     RestClientRequestSpec<?> delete();
 
+    RestClientRequestSpec<?> head();
+
+    RestClientRequestSpec<?> options();
+
     interface RestClientRequestSpec<S extends RestClientRequestSpec<?>> {
 
         S uri(RestRequestUri r);

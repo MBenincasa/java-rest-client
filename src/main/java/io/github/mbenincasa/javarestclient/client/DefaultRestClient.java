@@ -33,6 +33,16 @@ public class DefaultRestClient implements RestClient {
         return new DefaultRestClientRequest(HttpMethod.DELETE);
     }
 
+    @Override
+    public RestClientRequestSpec<?> head() {
+        return new DefaultRestClientRequest(HttpMethod.HEAD);
+    }
+
+    @Override
+    public RestClientRequestSpec<?> options() {
+        return new DefaultRestClientRequest(HttpMethod.OPTIONS);
+    }
+
     private static class DefaultRestClientRequest implements RestClientRequestBodySpec {
 
         private URI uri;
