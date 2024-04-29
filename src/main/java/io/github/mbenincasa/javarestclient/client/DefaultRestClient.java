@@ -29,6 +29,11 @@ public class DefaultRestClient implements RestClient {
     }
 
     @Override
+    public RestClientRequestBodySpec patch() {
+        return new DefaultRestClientRequest(HttpMethod.PATCH);
+    }
+
+    @Override
     public RestClientRequestSpec<?> delete() {
         return new DefaultRestClientRequest(HttpMethod.DELETE);
     }
@@ -77,7 +82,14 @@ public class DefaultRestClient implements RestClient {
             try {
                 URL url = this.uri.toURL();
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod(this.httpMethod.name());
+
+                if (this.httpMethod.equals(HttpMethod.PATCH)) {
+                    connection.setRequestMethod(HttpMethod.PUT.name());
+                    connection.setRequestProperty("X-HTTP-Method-Override", HttpMethod.PATCH.name());
+                } else {
+                    connection.setRequestMethod(this.httpMethod.name());
+                }
+
                 Iterator<HttpHeader> headersIterator = this.httpHeaders.getAll();
                 while (headersIterator.hasNext()) {
                     HttpHeader header = headersIterator.next();
@@ -111,6 +123,8 @@ public class DefaultRestClient implements RestClient {
                 this.headers = this.setHttpHeaders(connection);
             } catch (Exception e) {
                 throw new RestClientException(e.getMessage(), e.getCause());
+            } finally {
+                connection.disconnect();
             }
         }
 

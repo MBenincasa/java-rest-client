@@ -14,6 +14,8 @@ public interface RestClient {
 
     RestClientRequestBodySpec put();
 
+    RestClientRequestBodySpec patch();
+
     RestClientRequestSpec<?> delete();
 
     RestClientRequestSpec<?> head();

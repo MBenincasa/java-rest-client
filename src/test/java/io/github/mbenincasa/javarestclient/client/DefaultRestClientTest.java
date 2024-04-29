@@ -75,6 +75,24 @@ class DefaultRestClientTest {
     }
 
     @Test
+    public void testPatchRequest() throws RestClientException {
+        var response = restClient.patch()
+                .uri(UriBuilder.create()
+                        .uri(URI.create("https://reqres.in/api/users/2"))
+                        .build())
+                .headers(HeadersBuilder.create()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .build())
+                .body(new ReqResPatchRequest("Mark", "Dev"))
+                .retrieve();
+
+        assertNotNull(response);
+        assertNotNull(response.getBodyAsString());
+        assertEquals(HttpStatus.OK, response.getStatus());
+    }
+
+    @Test
     public void testDeleteRequest() throws RestClientException {
         var response = restClient.delete()
                 .uri(UriBuilder.create()

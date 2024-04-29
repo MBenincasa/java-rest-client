@@ -2,5 +2,5 @@ package io.github.mbenincasa.javarestclient.http;
 
 public enum HttpMethod {
 
-    GET, POST, PUT, DELETE, HEAD, OPTIONS
+    GET, POST, PUT, DELETE, HEAD, OPTIONS, PATCH
 }
