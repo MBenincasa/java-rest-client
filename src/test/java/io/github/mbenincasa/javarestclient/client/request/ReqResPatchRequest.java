@@ -1,13 +1,13 @@
-package io.github.mbenincasa.javarestclient.client;
+package io.github.mbenincasa.javarestclient.client.request;
 
-public class ReqResPostRequest {
+public class ReqResPatchRequest {
 
     private String name;
     private String job;
 
-    public ReqResPostRequest() {}
+    public ReqResPatchRequest() {}
 
-    public ReqResPostRequest(String name, String job) {
+    public ReqResPatchRequest(String name, String job) {
         this.name = name;
         this.job = job;
     }
@@ -30,7 +30,7 @@ public class ReqResPostRequest {
 
     @Override
     public String toString() {
-        return "PostRequestExample{" +
+        return "PutRequestExample{" +
                 "name='" + name + '\'' +
                 ", job='" + job + '\'' +
                 '}';
