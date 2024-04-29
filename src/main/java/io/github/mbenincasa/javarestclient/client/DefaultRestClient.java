@@ -85,7 +85,7 @@ public class DefaultRestClient implements RestClient {
 
                 if (this.httpMethod.equals(HttpMethod.PATCH)) {
                     connection.setRequestMethod(HttpMethod.PUT.name());
-                    connection.setRequestProperty("X-HTTP-Method-Override", HttpMethod.PATCH.name());
+                    this.httpHeaders.add("X-HTTP-Method-Override", HttpMethod.PATCH.name());
                 } else {
                     connection.setRequestMethod(this.httpMethod.name());
                 }

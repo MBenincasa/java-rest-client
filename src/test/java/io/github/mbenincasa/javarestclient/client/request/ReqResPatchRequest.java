@@ -1,4 +1,4 @@
-package io.github.mbenincasa.javarestclient.client;
+package io.github.mbenincasa.javarestclient.client.request;
 
 public class ReqResPatchRequest {
 
