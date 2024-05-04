@@ -14,7 +14,13 @@ public interface RestClient {
 
     RestClientRequestBodySpec put();
 
+    RestClientRequestBodySpec patch();
+
     RestClientRequestSpec<?> delete();
+
+    RestClientRequestSpec<?> head();
+
+    RestClientRequestSpec<?> options();
 
     interface RestClientRequestSpec<S extends RestClientRequestSpec<?>> {
 

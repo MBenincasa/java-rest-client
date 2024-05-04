@@ -2,6 +2,7 @@ package io.github.mbenincasa.javarestclient.client;
 
 import io.github.mbenincasa.javarestclient.exception.RestClientException;
 import io.github.mbenincasa.javarestclient.http.*;
+import io.github.mbenincasa.javarestclient.support.HeadersBuilder;
 import io.github.mbenincasa.javarestclient.support.RestBodyHandler;
 import io.github.mbenincasa.javarestclient.support.RestRequestHeaders;
 import io.github.mbenincasa.javarestclient.support.RestRequestUri;
@@ -29,8 +30,23 @@ public class DefaultRestClient implements RestClient {
     }
 
     @Override
+    public RestClientRequestBodySpec patch() {
+        return new DefaultRestClientRequest(HttpMethod.PATCH);
+    }
+
+    @Override
     public RestClientRequestSpec<?> delete() {
         return new DefaultRestClientRequest(HttpMethod.DELETE);
+    }
+
+    @Override
+    public RestClientRequestSpec<?> head() {
+        return new DefaultRestClientRequest(HttpMethod.HEAD);
+    }
+
+    @Override
+    public RestClientRequestSpec<?> options() {
+        return new DefaultRestClientRequest(HttpMethod.OPTIONS);
     }
 
     private static class DefaultRestClientRequest implements RestClientRequestBodySpec {
@@ -65,9 +81,24 @@ public class DefaultRestClient implements RestClient {
         @Override
         public RestClientResponseSpec retrieve() throws RestClientException {
             try {
+                if (this.httpHeaders == null) {
+                    this.httpHeaders = HeadersBuilder.create().build().getHeaders();
+                }
+
+                if (this.uri == null) {
+                    throw new Exception("The uri cannot be null. Invoke the uri() method");
+                }
+
                 URL url = this.uri.toURL();
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod(this.httpMethod.name());
+
+                if (this.httpMethod.equals(HttpMethod.PATCH)) {
+                    connection.setRequestMethod(HttpMethod.PUT.name());
+                    this.httpHeaders.add("X-HTTP-Method-Override", HttpMethod.PATCH.name());
+                } else {
+                    connection.setRequestMethod(this.httpMethod.name());
+                }
+
                 Iterator<HttpHeader> headersIterator = this.httpHeaders.getAll();
                 while (headersIterator.hasNext()) {
                     HttpHeader header = headersIterator.next();
@@ -101,6 +132,8 @@ public class DefaultRestClient implements RestClient {
                 this.headers = this.setHttpHeaders(connection);
             } catch (Exception e) {
                 throw new RestClientException(e.getMessage(), e.getCause());
+            } finally {
+                connection.disconnect();
             }
         }
 
