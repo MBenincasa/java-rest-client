@@ -27,7 +27,8 @@ class DefaultRestClientTest {
     public void testGetRequest() throws RestClientException {
         var response = restClient.get()
                 .uri(UriBuilder.create()
-                        .uri("https://reqres.in/api/users/2")
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
                         .accept(MediaType.APPLICATION_JSON)
@@ -72,7 +73,8 @@ class DefaultRestClientTest {
     public void testPutRequest() throws RestClientException {
         var response = restClient.put()
                 .uri(UriBuilder.create()
-                        .uri("https://reqres.in/api/users/2")
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -93,7 +95,8 @@ class DefaultRestClientTest {
     public void testPatchRequest() throws RestClientException {
         var response = restClient.patch()
                 .uri(UriBuilder.create()
-                        .uri("https://reqres.in/api/users/2")
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -114,7 +117,8 @@ class DefaultRestClientTest {
     public void testDeleteRequest() throws RestClientException {
         var response = restClient.delete()
                 .uri(UriBuilder.create()
-                        .uri("https://reqres.in/api/users/2")
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
                         .build())
@@ -128,7 +132,8 @@ class DefaultRestClientTest {
     public void testHeadRequest() throws RestClientException {
         var response = restClient.head()
                 .uri(UriBuilder.create()
-                        .uri("https://reqres.in/api/users/2")
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
                         .build())
@@ -142,7 +147,8 @@ class DefaultRestClientTest {
     public void testOptionsRequest() throws RestClientException {
         var response = restClient.options()
                 .uri(UriBuilder.create()
-                        .uri("https://reqres.in/api/users/2")
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
                         .build())
