@@ -3,10 +3,7 @@ package io.github.mbenincasa.javarestclient.client;
 import io.github.mbenincasa.javarestclient.client.request.ReqResPatchRequest;
 import io.github.mbenincasa.javarestclient.client.request.ReqResPostRequest;
 import io.github.mbenincasa.javarestclient.client.request.ReqResPutRequest;
-import io.github.mbenincasa.javarestclient.client.response.ReqResGetResponse;
-import io.github.mbenincasa.javarestclient.client.response.ReqResPatchResponse;
-import io.github.mbenincasa.javarestclient.client.response.ReqResPostResponse;
-import io.github.mbenincasa.javarestclient.client.response.ReqResPutResponse;
+import io.github.mbenincasa.javarestclient.client.response.*;
 import io.github.mbenincasa.javarestclient.exception.RestClientException;
 import io.github.mbenincasa.javarestclient.http.HttpStatus;
 import io.github.mbenincasa.javarestclient.http.MediaType;
@@ -14,8 +11,6 @@ import io.github.mbenincasa.javarestclient.support.HeadersBuilder;
 import io.github.mbenincasa.javarestclient.support.UriBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.net.URI;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,10 +27,10 @@ class DefaultRestClientTest {
     public void testGetRequest() throws RestClientException {
         var response = restClient.get()
                 .uri(UriBuilder.create()
-                        .uri(URI.create("https://reqres.in/api/users/2"))
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
-                        .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .build())
                 .retrieve();
@@ -57,7 +52,7 @@ class DefaultRestClientTest {
     public void testPostRequest() throws RestClientException {
         var response = restClient.post()
                 .uri(UriBuilder.create()
-                        .uri(URI.create("https://reqres.in/api/users"))
+                        .uri("https://reqres.in/api/users")
                         .build())
                 .headers(HeadersBuilder.create()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -78,7 +73,8 @@ class DefaultRestClientTest {
     public void testPutRequest() throws RestClientException {
         var response = restClient.put()
                 .uri(UriBuilder.create()
-                        .uri(URI.create("https://reqres.in/api/users/2"))
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -99,7 +95,8 @@ class DefaultRestClientTest {
     public void testPatchRequest() throws RestClientException {
         var response = restClient.patch()
                 .uri(UriBuilder.create()
-                        .uri(URI.create("https://reqres.in/api/users/2"))
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
                         .contentType(MediaType.APPLICATION_JSON)
@@ -120,10 +117,10 @@ class DefaultRestClientTest {
     public void testDeleteRequest() throws RestClientException {
         var response = restClient.delete()
                 .uri(UriBuilder.create()
-                        .uri(URI.create("https://reqres.in/api/users/2"))
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
-                        .contentType(MediaType.APPLICATION_JSON)
                         .build())
                 .retrieve();
 
@@ -135,10 +132,10 @@ class DefaultRestClientTest {
     public void testHeadRequest() throws RestClientException {
         var response = restClient.head()
                 .uri(UriBuilder.create()
-                        .uri(URI.create("https://reqres.in/api/users/2"))
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
-                        .contentType(MediaType.APPLICATION_JSON)
                         .build())
                 .retrieve();
 
@@ -150,14 +147,36 @@ class DefaultRestClientTest {
     public void testOptionsRequest() throws RestClientException {
         var response = restClient.options()
                 .uri(UriBuilder.create()
-                        .uri(URI.create("https://reqres.in/api/users/2"))
+                        .uri("https://reqres.in/api/users/{id}")
+                        .pathVariable("id", 2)
                         .build())
                 .headers(HeadersBuilder.create()
-                        .contentType(MediaType.APPLICATION_JSON)
                         .build())
                 .retrieve();
 
         assertNotNull(response);
         assertEquals(HttpStatus.NO_CONTENT, response.getStatus());
+    }
+
+    @Test
+    public void testRequestWithQueryParam() throws RestClientException {
+        var response = restClient.get()
+                .uri(UriBuilder.create()
+                        .uri("https://reqres.in/api/users")
+                        .queryParam("page", 2)
+                        .build())
+                .headers(HeadersBuilder.create()
+                        .accept(MediaType.APPLICATION_JSON)
+                        .build())
+                .retrieve();
+
+        assertNotNull(response);
+        ReqResGetQueryParamResponse payload = response.getBody(ReqResGetQueryParamResponse.class);
+        assertNotNull(payload);
+        assertEquals(2, payload.getPage());
+        assertEquals(6, payload.getPerPage());
+        assertEquals(12, payload.getTotal());
+        assertEquals(2, payload.getTotalPages());
+        assertEquals(HttpStatus.OK, response.getStatus());
     }
 }
