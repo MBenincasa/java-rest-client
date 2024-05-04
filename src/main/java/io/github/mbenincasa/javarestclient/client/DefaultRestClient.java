@@ -81,8 +81,12 @@ public class DefaultRestClient implements RestClient {
         @Override
         public RestClientResponseSpec retrieve() throws RestClientException {
             try {
-                if(this.httpHeaders == null) {
+                if (this.httpHeaders == null) {
                     this.httpHeaders = HeadersBuilder.create().build().getHeaders();
+                }
+
+                if (this.uri == null) {
+                    throw new Exception("The uri cannot be null. Invoke the uri() method");
                 }
 
                 URL url = this.uri.toURL();
