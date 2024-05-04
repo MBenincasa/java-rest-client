@@ -2,6 +2,7 @@ package io.github.mbenincasa.javarestclient.client;
 
 import io.github.mbenincasa.javarestclient.exception.RestClientException;
 import io.github.mbenincasa.javarestclient.http.*;
+import io.github.mbenincasa.javarestclient.support.HeadersBuilder;
 import io.github.mbenincasa.javarestclient.support.RestBodyHandler;
 import io.github.mbenincasa.javarestclient.support.RestRequestHeaders;
 import io.github.mbenincasa.javarestclient.support.RestRequestUri;
@@ -80,6 +81,10 @@ public class DefaultRestClient implements RestClient {
         @Override
         public RestClientResponseSpec retrieve() throws RestClientException {
             try {
+                if(this.httpHeaders == null) {
+                    this.httpHeaders = HeadersBuilder.create().build().getHeaders();
+                }
+
                 URL url = this.uri.toURL();
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 

@@ -120,8 +120,6 @@ class DefaultRestClientTest {
                         .uri("https://reqres.in/api/users/{id}")
                         .pathVariable("id", 2)
                         .build())
-                .headers(HeadersBuilder.create()
-                        .build())
                 .retrieve();
 
         assertNotNull(response);
@@ -135,8 +133,6 @@ class DefaultRestClientTest {
                         .uri("https://reqres.in/api/users/{id}")
                         .pathVariable("id", 2)
                         .build())
-                .headers(HeadersBuilder.create()
-                        .build())
                 .retrieve();
 
         assertNotNull(response);
@@ -149,8 +145,6 @@ class DefaultRestClientTest {
                 .uri(UriBuilder.create()
                         .uri("https://reqres.in/api/users/{id}")
                         .pathVariable("id", 2)
-                        .build())
-                .headers(HeadersBuilder.create()
                         .build())
                 .retrieve();
 
