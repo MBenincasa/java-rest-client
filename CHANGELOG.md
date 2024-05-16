@@ -27,3 +27,8 @@ All significant changes to this project will be documented in this file.
 - Support for HTTP DELETE requests.
 - Ability to add headers to requests.
 - Support for JSON data with `application/json` media type.
+
+### Dependencies Added
+- **com.fasterxml.jackson.core:jackson-databind:2.17.0** - Jackson Databind library for JSON processing.
+- **org.junit.jupiter:junit-jupiter:5.10.2** - JUnit Jupiter for unit testing.
+- **org.junit.platform:junit-platform-suite-engine:1.10.2** - JUnit Platform Suite Engine for organizing tests.
