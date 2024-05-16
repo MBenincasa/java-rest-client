@@ -1,9 +1,12 @@
 package io.github.mbenincasa.javarestclient.client;
 
-import io.github.mbenincasa.javarestclient.client.request.ReqResPatchRequest;
-import io.github.mbenincasa.javarestclient.client.request.ReqResPostRequest;
-import io.github.mbenincasa.javarestclient.client.request.ReqResPutRequest;
-import io.github.mbenincasa.javarestclient.client.response.*;
+import io.github.mbenincasa.javarestclient.client.request.booking.BookingPostRequest;
+import io.github.mbenincasa.javarestclient.client.request.reqres.ReqResPatchRequest;
+import io.github.mbenincasa.javarestclient.client.request.reqres.ReqResPostRequest;
+import io.github.mbenincasa.javarestclient.client.request.reqres.ReqResPutRequest;
+import io.github.mbenincasa.javarestclient.client.response.booking.BookingGetResponse;
+import io.github.mbenincasa.javarestclient.client.response.booking.BookingPostResponse;
+import io.github.mbenincasa.javarestclient.client.response.reqres.*;
 import io.github.mbenincasa.javarestclient.exception.RestClientException;
 import io.github.mbenincasa.javarestclient.http.HttpStatus;
 import io.github.mbenincasa.javarestclient.http.MediaType;
@@ -49,6 +52,26 @@ class DefaultRestClientTest {
     }
 
     @Test
+    public void testGetRequest2() throws RestClientException {
+        var response = restClient.get()
+                .uri(UriBuilder.create()
+                        .uri("https://restful-booker.herokuapp.com/booking/{id}")
+                        .pathVariable("id", 2)
+                        .build())
+                .headers(HeadersBuilder.create()
+                        .accept(MediaType.APPLICATION_XML)
+                        .build())
+                .retrieve();
+
+        assertNotNull(response);
+        BookingGetResponse payload = response.getBody(BookingGetResponse.class);
+        assertNotNull(payload);
+        assertNotNull(payload.getFirstname());
+        assertNotNull(payload.getLastname());
+        assertEquals(HttpStatus.OK, response.getStatus());
+    }
+
+    @Test
     public void testPostRequest() throws RestClientException {
         var response = restClient.post()
                 .uri(UriBuilder.create()
@@ -67,6 +90,26 @@ class DefaultRestClientTest {
         assertEquals("Mark", payload.getName());
         assertEquals("Dev", payload.getJob());
         assertEquals(HttpStatus.CREATED, response.getStatus());
+    }
+
+    @Test
+    public void testPostRequest2() throws RestClientException {
+        var response = restClient.post()
+                .uri(UriBuilder.create()
+                        .uri("https://restful-booker.herokuapp.com/booking")
+                        .build())
+                .headers(HeadersBuilder.create()
+                        .contentType(MediaType.TEXT_XML)
+                        .accept(MediaType.APPLICATION_XML)
+                        .build())
+                .body(new BookingPostRequest("Mark", "Jackson", 10, true, new BookingPostRequest.BookingPostRequestDates("2022-01-01", "2023-01-01"), "Breakfast"))
+                .retrieve();
+
+        assertNotNull(response);
+        BookingPostResponse payload = response.getBody(BookingPostResponse.class);
+        assertNotNull(payload);
+        assertNotNull(payload.getBooking());
+        assertEquals(HttpStatus.OK, response.getStatus());
     }
 
     @Test
