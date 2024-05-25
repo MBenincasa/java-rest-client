@@ -1,4 +1,4 @@
-package io.github.mbenincasa.javarestclient.client.response;
+package io.github.mbenincasa.javarestclient.client.response.reqres;
 
 import java.util.Date;
 

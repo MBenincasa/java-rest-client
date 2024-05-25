@@ -1,13 +1,13 @@
-package io.github.mbenincasa.javarestclient.client.request;
+package io.github.mbenincasa.javarestclient.client.request.reqres;
 
-public class ReqResPatchRequest {
+public class ReqResPutRequest {
 
     private String name;
     private String job;
 
-    public ReqResPatchRequest() {}
+    public ReqResPutRequest() {}
 
-    public ReqResPatchRequest(String name, String job) {
+    public ReqResPutRequest(String name, String job) {
         this.name = name;
         this.job = job;
     }
