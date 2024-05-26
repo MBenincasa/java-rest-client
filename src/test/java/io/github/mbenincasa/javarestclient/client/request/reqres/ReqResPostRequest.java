@@ -1,4 +1,4 @@
-package io.github.mbenincasa.javarestclient.client.request;
+package io.github.mbenincasa.javarestclient.client.request.reqres;
 
 public class ReqResPostRequest {
 

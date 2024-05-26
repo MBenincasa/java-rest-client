@@ -1,17 +1,17 @@
-package io.github.mbenincasa.javarestclient.client.response;
+package io.github.mbenincasa.javarestclient.client.response.reqres;
 
 import java.util.Date;
 
-public class ReqResPutResponse {
+public class ReqResPatchResponse {
 
     private String name;
     private String job;
     private Date updatedAt;
 
-    public ReqResPutResponse() {
+    public ReqResPatchResponse() {
     }
 
-    public ReqResPutResponse(String name, String job, Date updatedAt) {
+    public ReqResPatchResponse(String name, String job, Date updatedAt) {
         this.name = name;
         this.job = job;
         this.updatedAt = updatedAt;

@@ -5,7 +5,15 @@ import java.util.Arrays;
 public enum MediaType {
 
     ALL("*/*"),
-    APPLICATION_JSON("application/json");
+    APPLICATION_JSON("application/json"),
+    APPLICATION_VND_API_JSON("application/vnd.api+json"),
+    APPLICATION_XML("application/xml"),
+    APPLICATION_ATOM_XML("application/atom+xml"),
+    APPLICATION_RDF_XML("application/rdf+xml"),
+    APPLICATION_RSS_XML("application/rss+xml"),
+    APPLICATION_XHTML_XML("application/xhtml+xml"),
+    TEXT_XML("text/xml"),
+    TEXT_HTML("text/html");
 
     private final String value;
 

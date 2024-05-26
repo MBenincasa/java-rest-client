@@ -1,69 +1,24 @@
-package io.github.mbenincasa.javarestclient.client.response;
+package io.github.mbenincasa.javarestclient.client.response.reqres;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
-public class ReqResGetQueryParamResponse {
-
-    private Integer page;
-    @JsonProperty("per_page")
-    private Integer perPage;
-    private Integer total;
-    @JsonProperty("total_pages")
-    private Integer totalPages;
-    private List<ReqResData> data;
+public class ReqResGetResponse {
+    private ReqResData data;
     private ReqResSupport support;
 
-    public ReqResGetQueryParamResponse() {
+    public ReqResGetResponse() {
     }
 
-    public ReqResGetQueryParamResponse(Integer page, Integer perPage, Integer total, Integer totalPages, List<ReqResData> data, ReqResSupport support) {
-        this.page = page;
-        this.perPage = perPage;
-        this.total = total;
-        this.totalPages = totalPages;
+    public ReqResGetResponse(ReqResData data, ReqResSupport support) {
         this.data = data;
         this.support = support;
     }
 
-    public Integer getPage() {
-        return page;
-    }
-
-    public void setPage(Integer page) {
-        this.page = page;
-    }
-
-    public Integer getPerPage() {
-        return perPage;
-    }
-
-    public void setPerPage(Integer perPage) {
-        this.perPage = perPage;
-    }
-
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
-
-    public Integer getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(Integer totalPages) {
-        this.totalPages = totalPages;
-    }
-
-    public List<ReqResData> getData() {
+    public ReqResData getData() {
         return data;
     }
 
-    public void setData(List<ReqResData> data) {
+    public void setData(ReqResData data) {
         this.data = data;
     }
 
@@ -77,12 +32,8 @@ public class ReqResGetQueryParamResponse {
 
     @Override
     public String toString() {
-        return "ReqResGetQueryParamResponse{" +
-                "page=" + page +
-                ", perPage=" + perPage +
-                ", total=" + total +
-                ", totalPages=" + totalPages +
-                ", data=" + data +
+        return "ReqResGetResponse{" +
+                "data=" + data +
                 ", support=" + support +
                 '}';
     }
