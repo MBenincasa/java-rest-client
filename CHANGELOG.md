@@ -2,9 +2,22 @@
 
 All significant changes to this project will be documented in this file.
 
+## [0.3.0] - 2024-05-26
+
+### Added
+- Support for XML data with different media types.
+- Support for JSON data with `application/vnd.api+json` media type.
+- New methods in `HeadersBuilder` to support additional HTTP headers
+
+### Dependencies Added
+- **com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.17.1** - Jackson Databind library for XML processing.
+
+### Dependencies Updated
+- Updated `com.fasterxml.jackson.core:jackson-databind` from **2.17.0** to **2.17.1**
+
 ## [0.2.0] - 2024-05-04
 
-### Adeed
+### Added
 
 - Support for HTTP PATCH requests.
 - Support for HTTP HEAD requests.

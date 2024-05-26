@@ -21,7 +21,8 @@ Welcome to the Java REST Client Library! This library provides a convenient way 
 Java 17 or above.
 
 ## Dependencies
-- com.fasterxml.jackson.core:jackson-databind:jar:2.17.0
+- com.fasterxml.jackson.core:jackson-databind:jar:2.17.1
+- com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.17.1
 - org.junit.jupiter:junit-jupiter:jar:5.10.2
 - org.junit.platform:junit-platform-suite-engine:jar:1.10.2
 
@@ -32,7 +33,7 @@ To include this library in your Maven project, add the following dependency to y
 <dependency>
   <groupId>io.github.mbenincasa</groupId>
   <artifactId>java-rest-client</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 

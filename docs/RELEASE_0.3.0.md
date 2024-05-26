@@ -1,4 +1,4 @@
-# Release 0.2.0
+# Release 0.3.0
 
 ## Table of Contents
 - [Overview](#overview)
@@ -15,7 +15,7 @@
 
 ## Overview
 
-Version 0.2.0 introduces significant enhancements and new features for the Java REST client library. This update focuses on expanding the capabilities of the REST client, improving error handling, and increasing flexibility in library usage. Key additions include support for HTTP PATCH, HEAD, and OPTIONS methods, along with the ability to handle query parameters and path variables. Additionally, critical issues have been addressed, improving the overall reliability of the library. Read on to learn more about the changes introduced in version 0.2.0.
+Version 0.3.0 introduces several significant enhancements and new features to the Java REST client library, broadening its capabilities and making it more versatile for various use cases. This update includes support for additional media types, new methods for setting HTTP headers, and improvements to the overall functionality of the library. The library now supports XML data, allowing you to send and receive XML payloads in your HTTP requests and responses. Additionally, the `application/vnd.api+json` media type is now supported, catering to APIs that use this specific content type. Numerous new methods have been added to the `HeadersBuilder` class, providing a comprehensive set of options for setting HTTP headers, including headers for caching, authorization, content, and more.
 
 ## Features
 
@@ -28,7 +28,8 @@ Version 0.2.0 introduces significant enhancements and new features for the Java 
 - HTTP OPTIONS requests
 - Support for query parameters and path variables
 - Adding headers to requests
-- Support for JSON data with `application/json` media type
+- Support for JSON data
+- Support for XML data
 
 ## Usage
 
@@ -156,9 +157,46 @@ The `HeadersBuilder` class provides a builder pattern for constructing HTTP head
 
 - `create()`: Creates a new instance of `HeadersBuilder`.
 - `add(String key, Object value)`: Adds a header with the specified key and value to the headers.
-- `contentType(MediaType mediaType)`: Sets the `Content-Type` header to the specified media type.
 - `accept(MediaType mediaType)`: Sets the `Accept` header to the specified media type.
-- `build()`: Builds the headers and returns a `RestRequestHeaders` object.
+- `acceptCharset(Object value)`: Sets the `Accept-Charset` header to the specified value.
+- `acceptEncoding(Object value)`: Sets the `Accept-Encoding` header to the specified value.
+- `acceptLanguage(Object value)`: Sets the `Accept-Language` header to the specified value.
+- `accessControlRequestHeaders(Object value)`: Sets the `Access-Control-Request-Headers` header to the specified value.
+- `accessControlRequestMethod(Object value)`: Sets the `Access-Control-Request-Method` header to the specified value.
+- `authorization(Object value)`: Sets the `Authorization` header to the specified value.
+- `cacheControl(Object value)`: Sets the `Cache-Control` header to the specified value.
+- `contentMD5(Object value)`: Sets the `Content-MD5` header to the specified value.
+- `contentLength(Object value)`: Sets the `Content-Length` header to the specified value.
+- `contentTransferEncoding(Object value)`: Sets the `Content-Transfer-Encoding` header to the specified value.
+- `contentType(MediaType mediaType)`: Sets the `Content-Type` header to the specified media type.
+- `cookie(Object value)`: Sets the `Cookie` header to the specified value.
+- `date(Object value)`: Sets the `Date` header to the specified value.
+- `expect(Object value)`: Sets the `Expect` header to the specified value.
+- `from(Object value)`: Sets the `From` header to the specified value.
+- `host(Object value)`: Sets the `Host` header to the specified value.
+- `ifMatch(Object value)`: Sets the `If-Match` header to the specified value.
+- `ifModifiedSince(Object value)`: Sets the `If-Modified-Since` header to the specified value.
+- `ifNoneMatch(Object value)`: Sets the `If-None-Match` header to the specified value.
+- `ifRange(Object value)`: Sets the `If-Range` header to the specified value.
+- `ifUnmodifiedSince(Object value)`: Sets the `If-Unmodified-Since` header to the specified value.
+- `keepAlive(Object value)`: Sets the `Keep-Alive` header to the specified value.
+- `maxForwards(Object value)`: Sets the `Max-Forwards` header to the specified value.
+- `origin(Object value)`: Sets the `Origin` header to the specified value.
+- `pragma(Object value)`: Sets the `Pragma` header to the specified value.
+- `proxyAuthorization(Object value)`: Sets the `Proxy-Authorization` header to the specified value.
+- `range(Object value)`: Sets the `Range` header to the specified value.
+- `referer(Object value)`: Sets the `Referer` header to the specified value.
+- `te(Object value)`: Sets the `TE` header to the specified value.
+- `trailer(Object value)`: Sets the `Trailer` header to the specified value.
+- `transferEncoding(Object value)`: Sets the `Transfer-Encoding` header to the specified value.
+- `upgrade(Object value)`: Sets the `Upgrade` header to the specified value.
+- `userAgent(Object value)`: Sets the `User-Agent` header to the specified value.
+- `via(Object value)`: Sets the `Via` header to the specified value.
+- `warning(Object value)`: Sets the `Warning` header to the specified value.
+- `xRequestedWith(Object value)`: Sets the `X-Requested-With` header to the specified value.
+- `xDoNotTrack(Object value)`: Sets the `X-Do-Not-Track` header to the specified value.
+- `DNT(Object value)`: Sets the `DNT` header to the specified value.
+- `connection(Object value)`: Sets the `Connection` header to the specified value.
 
 #### Example Usage
 
