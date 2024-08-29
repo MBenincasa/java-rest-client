@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.List;
 
 public class DefaultRestClient implements RestClient {
 
@@ -151,6 +152,15 @@ public class DefaultRestClient implements RestClient {
         public <T> T getBody(Class<T> bodyType) throws RestClientException {
             try {
                 return RestBodyHandler.deserialize(this.body, bodyType, MediaType.get(this.getHeaders().get("Content-Type")));
+            } catch (Exception e) {
+                throw new RestClientException(e.getMessage(), e.getCause());
+            }
+        }
+
+        @Override
+        public <T> List<T> getBodyAsList(Class<T> bodyType) throws RestClientException {
+            try {
+                return RestBodyHandler.deserializeList(this.body, bodyType, MediaType.get(this.getHeaders().get("Content-Type")));
             } catch (Exception e) {
                 throw new RestClientException(e.getMessage(), e.getCause());
             }
