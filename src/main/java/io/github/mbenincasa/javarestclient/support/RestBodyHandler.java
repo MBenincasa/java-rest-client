@@ -7,6 +7,8 @@ import io.github.mbenincasa.javarestclient.http.MediaType;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.List;
 
 public class RestBodyHandler {
 
@@ -24,14 +26,38 @@ public class RestBodyHandler {
             return jsonMapper.readValue(body, bodyType);
         } else if (
                 contentType == MediaType.APPLICATION_XML ||
-                        contentType == MediaType.APPLICATION_ATOM_XML ||
-                        contentType == MediaType.APPLICATION_RDF_XML ||
-                        contentType == MediaType.APPLICATION_RSS_XML ||
-                        contentType == MediaType.APPLICATION_XHTML_XML ||
-                        contentType == MediaType.TEXT_XML ||
-                        contentType == MediaType.TEXT_HTML
+                contentType == MediaType.APPLICATION_ATOM_XML ||
+                contentType == MediaType.APPLICATION_RDF_XML ||
+                contentType == MediaType.APPLICATION_RSS_XML ||
+                contentType == MediaType.APPLICATION_XHTML_XML ||
+                contentType == MediaType.TEXT_XML ||
+                contentType == MediaType.TEXT_HTML
         ) {
             return xmlMapper.readValue(new String(body, StandardCharsets.UTF_8), bodyType);
+        }
+        throw new RuntimeException("Unsupported content type: " + contentType);
+    }
+
+    public static <T> List<T> deserializeList(byte[] body, Class<T> bodyType, MediaType contentType) throws IOException {
+        if (body == null || body.length == 0) {
+            return Collections.emptyList();
+        }
+        if (
+                contentType == MediaType.APPLICATION_JSON ||
+                contentType == MediaType.APPLICATION_VND_API_JSON
+        ) {
+            return jsonMapper.readValue(body, jsonMapper.getTypeFactory().constructCollectionType(List.class, bodyType));
+        } else if (
+                contentType == MediaType.APPLICATION_XML ||
+                contentType == MediaType.APPLICATION_ATOM_XML ||
+                contentType == MediaType.APPLICATION_RDF_XML ||
+                contentType == MediaType.APPLICATION_RSS_XML ||
+                contentType == MediaType.APPLICATION_XHTML_XML ||
+                contentType == MediaType.TEXT_XML ||
+                contentType == MediaType.TEXT_HTML) {
+
+            String bodyStr = new String(body, StandardCharsets.UTF_8);
+            return xmlMapper.readValue(bodyStr, xmlMapper.getTypeFactory().constructCollectionType(List.class, bodyType));
         }
         throw new RuntimeException("Unsupported content type: " + contentType);
     }

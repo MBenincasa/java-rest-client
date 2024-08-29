@@ -4,6 +4,7 @@ import io.github.mbenincasa.javarestclient.client.request.booking.BookingPostReq
 import io.github.mbenincasa.javarestclient.client.request.reqres.ReqResPatchRequest;
 import io.github.mbenincasa.javarestclient.client.request.reqres.ReqResPostRequest;
 import io.github.mbenincasa.javarestclient.client.request.reqres.ReqResPutRequest;
+import io.github.mbenincasa.javarestclient.client.response.openweathermap.GeocodingLocationDTO;
 import io.github.mbenincasa.javarestclient.client.response.booking.BookingGetResponse;
 import io.github.mbenincasa.javarestclient.client.response.booking.BookingPostResponse;
 import io.github.mbenincasa.javarestclient.client.response.reqres.*;
@@ -14,6 +15,8 @@ import io.github.mbenincasa.javarestclient.support.HeadersBuilder;
 import io.github.mbenincasa.javarestclient.support.UriBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -216,4 +219,32 @@ class DefaultRestClientTest {
         assertEquals(2, payload.getTotalPages());
         assertEquals(HttpStatus.OK, response.getStatus());
     }
+
+    /*
+    @Test
+    public void testRequestGetList() throws RestClientException {
+        var response = restClient.get()
+                .uri(UriBuilder.create()
+                        .uri("http://api.openweathermap.org/geo/1.0/direct")
+                        .queryParam("appid", "API_KEY")
+                        .queryParam("q", "London,England,GB")
+                        .queryParam("limit", 1)
+                        .build())
+                .headers(HeadersBuilder.create()
+                        .accept(MediaType.APPLICATION_JSON)
+                        .build())
+                .retrieve();
+
+        assertNotNull(response);
+        List<GeocodingLocationDTO> payload = response.getBodyAsList(GeocodingLocationDTO.class);
+        assertNotNull(payload);
+        assertEquals(1, payload.size());
+        GeocodingLocationDTO dto = payload.get(0);
+        assertNotNull(dto);
+        assertEquals("London", dto.getName());
+        assertEquals("GB", dto.getCountry());
+        assertEquals("England", dto.getState());
+        assertEquals("Londra", dto.getLocalNames().getIt());
+    }
+    */
 }

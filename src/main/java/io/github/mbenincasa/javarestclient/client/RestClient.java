@@ -6,6 +6,8 @@ import io.github.mbenincasa.javarestclient.http.HttpStatus;
 import io.github.mbenincasa.javarestclient.support.RestRequestHeaders;
 import io.github.mbenincasa.javarestclient.support.RestRequestUri;
 
+import java.util.List;
+
 public interface RestClient {
 
     RestClientRequestSpec<?> get();
@@ -43,6 +45,8 @@ public interface RestClient {
         HttpHeaders getHeaders();
 
         <T> T getBody(Class<T> bodyType) throws RestClientException;
+
+        <T> List<T> getBodyAsList(Class<T> bodyType) throws RestClientException;
 
         String getBodyAsString();
     }

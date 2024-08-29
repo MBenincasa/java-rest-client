@@ -1,4 +1,4 @@
-# Release 0.3.0
+# Release 0.3.1
 
 ## Table of Contents
 - [Overview](#overview)
@@ -15,7 +15,7 @@
 
 ## Overview
 
-Version 0.3.0 introduces several significant enhancements and new features to the Java REST client library, broadening its capabilities and making it more versatile for various use cases. This update includes support for additional media types, new methods for setting HTTP headers, and improvements to the overall functionality of the library. The library now supports XML data, allowing you to send and receive XML payloads in your HTTP requests and responses. Additionally, the `application/vnd.api+json` media type is now supported, catering to APIs that use this specific content type. Numerous new methods have been added to the `HeadersBuilder` class, providing a comprehensive set of options for setting HTTP headers, including headers for caching, authorization, content, and more.
+Version 0.3.1 fixes a bug in the getBody() method that cannot deserialize Lists. The new method, getBodyAsList() allows deserialization of a body returning the List type.
 
 ## Features
 
@@ -249,6 +249,7 @@ The `DefaultRestClientResponse` class implements the `RestClientResponseSpec` in
 - `getStatus()`: Returns the HTTP status code of the response.
 - `getHeaders()`: Returns the headers included in the response.
 - `getBody(Class<T> bodyType)`: Returns the body of the response deserialized into the specified type. Either JSON or XML bodies can be deserialized.
+- `getBodyAsList(Class<T> bodyType)`: Returns the deserialized response body to the specified type as List. Either JSON or XML bodies can be deserialized.
 - `getBodyAsString()`: Returns the body of the response as a string.
 
 #### Example Usage
