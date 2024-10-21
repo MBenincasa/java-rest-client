@@ -16,8 +16,6 @@ import io.github.mbenincasa.javarestclient.support.UriBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DefaultRestClientTest {
@@ -245,6 +243,27 @@ class DefaultRestClientTest {
         assertEquals("GB", dto.getCountry());
         assertEquals("England", dto.getState());
         assertEquals("Londra", dto.getLocalNames().getIt());
+    }
+    */
+
+    /*
+    @Test
+    public void testRequestGetFile() throws RestClientException, IOException {
+        var response = restClient.get()
+                .uri(UriBuilder.create()
+                        .uri("https://tile.openweathermap.org/map/{layer}/{z}/{x}/{y}.png")
+                        .pathVariable("layer", "temp_new")
+                        .pathVariable("z", 0)
+                        .pathVariable("x", 0)
+                        .pathVariable("y", 0)
+                        .queryParam("appid", "API_KEY")
+                        .build())
+                .retrieve();
+
+        var fileRaw = response.getBodyAsRaw();
+
+        assertNotNull(fileRaw);
+        assertTrue(fileRaw.length > 0);
     }
     */
 }

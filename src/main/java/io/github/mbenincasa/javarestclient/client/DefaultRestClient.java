@@ -171,6 +171,11 @@ public class DefaultRestClient implements RestClient {
             return RestBodyHandler.deserialize(this.body);
         }
 
+        @Override
+        public byte[] getBodyAsRaw() {
+            return this.body;
+        }
+
         private HttpHeaders setHttpHeaders(HttpURLConnection connection) {
             return new HttpHeaders(connection.getHeaderFields());
         }
