@@ -2,6 +2,17 @@
 
 All significant changes to this project will be documented in this file.
 
+## [0.3.2] - 2024-10-21
+
+### Added
+- The `byte[] getBodyAsRaw()` has been added to retrieve the raw body of a response
+
+### Dependencies Updated
+- Updated `com.fasterxml.jackson.core:jackson-databind` from **2.17.2** to **2.18.0**
+- Updated `com.fasterxml.jackson.dataformat:jackson-dataformat-xml` from **2.17.2** to **2.18.0**
+- Updated `org.junit.jupiter:junit-jupiter` from **5.11.0** to **5.11.2**
+- Updated `org.junit.platform:junit-platform-suite-engine` from **1.11.0** to **1.11.2**
+
 ## [0.3.1] - 2024-08-29
 
 ### Fixed

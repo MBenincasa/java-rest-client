@@ -49,5 +49,7 @@ public interface RestClient {
         <T> List<T> getBodyAsList(Class<T> bodyType) throws RestClientException;
 
         String getBodyAsString();
+
+        byte[] getBodyAsRaw();
     }
 }

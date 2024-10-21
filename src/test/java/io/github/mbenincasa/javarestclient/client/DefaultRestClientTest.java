@@ -247,4 +247,25 @@ class DefaultRestClientTest {
         assertEquals("Londra", dto.getLocalNames().getIt());
     }
     */
+
+    /*
+    @Test
+    public void testRequestGetFile() throws RestClientException {
+        var response = restClient.get()
+                .uri(UriBuilder.create()
+                        .uri("https://tile.openweathermap.org/map/{layer}/{z}/{x}/{y}.png")
+                        .pathVariable("layer", "temp_new")
+                        .pathVariable("z", 0)
+                        .pathVariable("x", 0)
+                        .pathVariable("y", 0)
+                        .queryParam("appid", "API_KEY")
+                        .build())
+                .retrieve();
+
+        var fileRaw = response.getBodyAsRaw();
+
+        assertNotNull(fileRaw);
+        assertTrue(fileRaw.length > 0);
+    }
+    */
 }
