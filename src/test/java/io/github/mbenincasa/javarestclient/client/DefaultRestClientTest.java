@@ -16,6 +16,8 @@ import io.github.mbenincasa.javarestclient.support.UriBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DefaultRestClientTest {
@@ -248,7 +250,7 @@ class DefaultRestClientTest {
 
     /*
     @Test
-    public void testRequestGetFile() throws RestClientException, IOException {
+    public void testRequestGetFile() throws RestClientException {
         var response = restClient.get()
                 .uri(UriBuilder.create()
                         .uri("https://tile.openweathermap.org/map/{layer}/{z}/{x}/{y}.png")
