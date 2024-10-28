@@ -220,12 +220,28 @@ class DefaultRestClientTest {
         assertEquals(HttpStatus.OK, response.getStatus());
     }
 
+    @Test
+    public void testRequestKo() throws RestClientException {
+        var response = restClient.get()
+                .uri(UriBuilder.create()
+                        .uri("https://tile.openweathermap.org/map/{layer}/{z}/{x}/{y}.png")
+                        .pathVariable("layer", "temp_new")
+                        .pathVariable("z", 0)
+                        .pathVariable("x", 0)
+                        .pathVariable("y", 0)
+                        .queryParam("appid", "API_KEY")
+                        .build())
+                .retrieve();
+
+        assertEquals(401, response.getStatus().getValue());
+    }
+
     /*
     @Test
     public void testRequestGetList() throws RestClientException {
         var response = restClient.get()
                 .uri(UriBuilder.create()
-                        .uri("http://api.openweathermap.org/geo/1.0/direct")
+                        .uri("https://api.openweathermap.org/geo/1.0/direct")
                         .queryParam("appid", "API_KEY")
                         .queryParam("q", "London,England,GB")
                         .queryParam("limit", 1)
@@ -264,6 +280,7 @@ class DefaultRestClientTest {
 
         var fileRaw = response.getBodyAsRaw();
 
+        assertEquals(200, response.getStatus().getValue());
         assertNotNull(fileRaw);
         assertTrue(fileRaw.length > 0);
     }
