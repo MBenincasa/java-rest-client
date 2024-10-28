@@ -2,6 +2,15 @@
 
 All significant changes to this project will be documented in this file.
 
+## [0.3.3] - 2024-10-28
+
+### Fixed
+- Previously, `connection.getInputStream()` would throw an `IOException` on error responses, causing the process to fail. Updated to use `connection.getErrorStream()` to handle error streams properly.
+
+### Dependencies Updated
+- Updated `org.junit.jupiter:junit-jupiter` from **5.11.2** to **5.11.3**
+- Updated `org.junit.platform:junit-platform-suite-engine` from **1.11.2** to **1.11.3**
+
 ## [0.3.2] - 2024-10-21
 
 ### Added
