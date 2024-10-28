@@ -13,7 +13,23 @@ public enum MediaType {
     APPLICATION_RSS_XML("application/rss+xml"),
     APPLICATION_XHTML_XML("application/xhtml+xml"),
     TEXT_XML("text/xml"),
-    TEXT_HTML("text/html");
+    TEXT_HTML("text/html"),
+    TEXT_PLAIN("text/plain"),
+    APPLICATION_OCTET_STREAM("application/octet-stream"),
+    APPLICATION_FORM_URLENCODED("application/x-www-form-urlencoded"),
+    APPLICATION_JSON_PATCH("application/json-patch+json"),
+    APPLICATION_GRAPHQL("application/graphql"),
+    APPLICATION_MSWORD("application/msword"),
+    APPLICATION_VND_OPENXMLFORMATS_OFFICEDOCUMENT_WORDPROCESSINGML_DOCUMENT("application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
+    APPLICATION_PDF("application/pdf"),
+    IMAGE_PNG("image/png"),
+    IMAGE_JPEG("image/jpeg"),
+    IMAGE_GIF("image/gif"),
+    IMAGE_SVG_XML("image/svg+xml"),
+    VIDEO_MP4("video/mp4"),
+    VIDEO_MPEG("video/mpeg"),
+    AUDIO_MPEG("audio/mpeg"),
+    AUDIO_WAV("audio/wav");
 
     private final String value;
 
