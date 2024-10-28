@@ -6,7 +6,7 @@
 
     <groupId>io.github.mbenincasa</groupId>
     <artifactId>java-rest-client</artifactId>
-    <version>0.3.2</version>
+    <version>0.3.3</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -30,13 +30,13 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.11.2</version>
+            <version>5.11.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite-engine</artifactId>
-            <version>1.11.2</version>
+            <version>1.11.3</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

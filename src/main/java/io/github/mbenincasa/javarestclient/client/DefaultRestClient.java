@@ -7,6 +7,8 @@ import io.github.mbenincasa.javarestclient.support.RestBodyHandler;
 import io.github.mbenincasa.javarestclient.support.RestRequestHeaders;
 import io.github.mbenincasa.javarestclient.support.RestRequestUri;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
@@ -129,10 +131,10 @@ public class DefaultRestClient implements RestClient {
         private DefaultRestClientResponse(HttpURLConnection connection) throws RestClientException {
             try {
                 this.status = HttpStatus.fromValue(connection.getResponseCode());
-                this.body = connection.getInputStream().readAllBytes();
-                this.headers = this.setHttpHeaders(connection);
+                this.headers = setHttpHeaders(connection);
+                this.body = readResponseBody(connection);
             } catch (Exception e) {
-                throw new RestClientException(e.getMessage(), e.getCause());
+                throw new RestClientException("Error processing response: " + e.getMessage(), e);
             } finally {
                 connection.disconnect();
             }
@@ -178,6 +180,14 @@ public class DefaultRestClient implements RestClient {
 
         private HttpHeaders setHttpHeaders(HttpURLConnection connection) {
             return new HttpHeaders(connection.getHeaderFields());
+        }
+
+        private byte[] readResponseBody(HttpURLConnection connection) throws IOException {
+            try (InputStream inputStream = connection.getInputStream()) {
+                return inputStream.readAllBytes();
+            } catch (IOException e) {
+                return connection.getErrorStream().readAllBytes();
+            }
         }
     }
 }

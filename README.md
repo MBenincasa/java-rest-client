@@ -22,8 +22,8 @@ Java 17 or above.
 ## Dependencies
 - com.fasterxml.jackson.core:jackson-databind:jar:2.18.0
 - com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.18.0
-- org.junit.jupiter:junit-jupiter:jar:5.11.2
-- org.junit.platform:junit-platform-suite-engine:jar:1.11.2
+- org.junit.jupiter:junit-jupiter:jar:5.11.3
+- org.junit.platform:junit-platform-suite-engine:jar:1.11.3
 
 ## Maven Dependency
 To include this library in your Maven project, add the following dependency to your `pom.xml`:
@@ -32,7 +32,7 @@ To include this library in your Maven project, add the following dependency to y
 <dependency>
   <groupId>io.github.mbenincasa</groupId>
   <artifactId>java-rest-client</artifactId>
-  <version>0.3.2</version>
+  <version>0.3.3</version>
 </dependency>
 ```
 
