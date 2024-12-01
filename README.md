@@ -26,7 +26,7 @@ Java 17 or above.
 - org.junit.platform:junit-platform-suite-engine:jar:1.11.3
 
 ## Maven Dependency
-To include this library in your Maven project, add the following dependency to your `pom.xml`:
+Currently, the library is hosted on GitHub Packages. To include this library in your Maven project, add the following dependency and repository to your `pom.xml`:
 
 ```xml
 <dependency>
@@ -34,6 +34,15 @@ To include this library in your Maven project, add the following dependency to y
   <artifactId>java-rest-client</artifactId>
   <version>0.3.3</version>
 </dependency>
+```
+
+```xml
+<repositories>
+  <repository>
+    <id>github</id>
+    <url>https://maven.pkg.github.com/MBenincasa/java-rest-client</url>
+  </repository>
+</repositories>
 ```
 
 ## Documentation
