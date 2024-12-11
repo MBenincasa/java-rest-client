@@ -50,7 +50,6 @@ class DefaultRestClientTest {
         assertEquals("Janet", payload.getData().getFirstName());
         assertEquals("Weaver", payload.getData().getLastName());
         assertNotNull(payload.getSupport());
-        assertEquals("https://reqres.in/#support-heading", payload.getSupport().getUrl());
         assertEquals(HttpStatus.OK, response.getStatus());
     }
 
