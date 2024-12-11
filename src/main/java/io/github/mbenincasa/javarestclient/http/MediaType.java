@@ -50,4 +50,11 @@ public enum MediaType {
                 .findFirst()
                 .orElse(null);
     }
+
+    @Override
+    public String toString() {
+        return "MediaType{" +
+                "value='" + value + '\'' +
+                '}';
+    }
 }
