@@ -7,6 +7,10 @@
     <groupId>io.github.mbenincasa</groupId>
     <artifactId>java-rest-client</artifactId>
     <version>0.3.3</version>
+    <packaging>jar</packaging>
+    <name>Java Rest Client</name>
+    <description>This library provides a convenient way to interact with RESTful APIs in Java applications. Whether you're building a web service client, integrating with third-party APIs, or developing a microservice architecture, this library aims to simplify the process of making HTTP requests and handling responses.</description>
+    <url>https://github.com/MBenincasa/java-rest-client</url>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -79,6 +83,59 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!--
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.13</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>central</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
         </plugins>
     </build>
 
@@ -89,5 +146,37 @@
             <url>https://maven.pkg.github.com/MBenincasa/java-rest-client</url>
         </repository>
     </distributionManagement>
+
+    <!--
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>Central Repository OSSRH</name>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+    -->
+
+    <scm>
+        <connection>scm:git:git://github.com/MBenincasa/java-rest-client.git</connection>
+        <developerConnection>scm:git:ssh://github.com:MBenincasa/java-rest-client.git</developerConnection>
+        <url>https://github.com/MBenincasa/java-rest-client</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Mirko Benincasa</name>
+            <email>mirkobenincasa44@gmail.com</email>
+            <organization>io.github.mbenincasa</organization>
+            <organizationUrl>https://github.com/MBenincasa</organizationUrl>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>GPL-v3.0</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
+        </license>
+    </licenses>
 
 </project>
