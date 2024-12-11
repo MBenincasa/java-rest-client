@@ -1,3 +1,4 @@
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.mbenincasa/java-rest-client.svg?label=Maven%20Central)](https://central.sonatype.com/search?namespace=io.github.mbenincasa&name=java-rest-client)
 [![GitHub release](https://img.shields.io/github/release/MBenincasa/java-rest-client)](https://github.com/MBenincasa/java-rest-client/releases/)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 ![workflow](https://github.com/MBenincasa/java-rest-client/actions/workflows/maven-publish.yml/badge.svg)<p>
@@ -26,6 +27,7 @@ Java 17 or above.
 - org.junit.platform:junit-platform-suite-engine:jar:1.11.3
 
 ## Maven Dependency
+The library is available on **GitHub Packages**, and on **Maven Central** starting from version `0.3.3`.
 To include this library in your Maven project, add the following dependency to your `pom.xml`:
 
 ```xml
@@ -35,6 +37,35 @@ To include this library in your Maven project, add the following dependency to y
   <version>0.3.3</version>
 </dependency>
 ```
+
+If you want to use **GitHub Packages**, you need to add the GitHub Packages repository to your `pom.xml` or `settings.xml` and authenticate using your GitHub token.
+
+### Add GitHub Packages Repository
+In your `pom.xml`, add the following repository configuration:
+
+```xml
+<repositories>
+    <repository>
+        <id>github</id>
+        <url>https://maven.pkg.github.com/MBenincasa/java-rest-client</url>
+    </repository>
+</repositories>
+```
+
+### Add Authentication for GitHub Packages
+In your `settings.xml` (located in the `.m2` directory), add the following server configuration to authenticate with GitHub Packages:
+
+```xml
+<servers>
+    <server>
+        <id>github</id>
+        <username>your-github-username</username>
+        <password>your-github-token</password>
+    </server>
+</servers>
+```
+
+Replace `your-github-username` with your GitHub username and `your-github-token` with a GitHub Personal Access Token (PAT) that has the necessary permissions.
 
 ## Documentation
 You can find the documentation for each release in the [docs folder](https://github.com/MBenincasa/java-rest-client/tree/master/docs)
