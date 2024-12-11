@@ -43,4 +43,23 @@ public class HttpHeaders {
     public Iterator<HttpHeader> getAll() {
         return this.headers.iterator();
     }
+
+    @Override
+    public String toString() {
+        return "HttpHeaders{" +
+                "headers=" + headers +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HttpHeaders that)) return false;
+        return Objects.equals(headers, that.headers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(headers);
+    }
 }

@@ -25,6 +25,9 @@ Java 17 or above.
 - com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.18.0
 - org.junit.jupiter:junit-jupiter:jar:5.11.3
 - org.junit.platform:junit-platform-suite-engine:jar:1.11.3
+- org.apache.logging.log4j:log4j-api:2.24.2
+- org.apache.logging.log4j:log4j-core:2.24.2
+- org.apache.logging.log4j:log4j-slf4j2-impl:2.24.2
 
 ## Maven Dependency
 The library is available on **GitHub Packages**, and on **Maven Central** starting from version `0.3.3`.
@@ -34,7 +37,7 @@ To include this library in your Maven project, add the following dependency to y
 <dependency>
   <groupId>io.github.mbenincasa</groupId>
   <artifactId>java-rest-client</artifactId>
-  <version>0.3.3</version>
+  <version>0.3.4</version>
 </dependency>
 ```
 

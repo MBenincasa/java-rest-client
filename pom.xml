@@ -6,7 +6,7 @@
 
     <groupId>io.github.mbenincasa</groupId>
     <artifactId>java-rest-client</artifactId>
-    <version>0.3.3</version>
+    <version>0.3.4</version>
     <packaging>jar</packaging>
     <name>Java Rest Client</name>
     <description>This library provides a convenient way to interact with RESTful APIs in Java applications. Whether you're building a web service client, integrating with third-party APIs, or developing a microservice architecture, this library aims to simplify the process of making HTTP requests and handling responses.</description>
@@ -28,6 +28,23 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>2.18.0</version>
+        </dependency>
+
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.24.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.24.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j2-impl</artifactId>
+            <version>2.24.2</version>
         </dependency>
 
         <!-- Test -->

@@ -2,6 +2,17 @@
 
 All significant changes to this project will be documented in this file.
 
+## [0.3.4] - 2024-12-11
+
+### Enhancements
+- Introduced detailed logging in key classes to improve traceability and debugging.
+- Implemented `equals()`, `hashCode()`, and `toString()` methods in certain classes to ensure consistent behavior, improve readability, and facilitate easier object comparison and logging.
+
+### Dependencies Added
+- **org.apache.logging.log4j:log4j-api:2.24.2** - Provides the Log4j API, offering interfaces for logging (e.g., Logger, Appender) to abstract the logging implementation and enable integration with other logging frameworks.
+- **org.apache.logging.log4j:log4j-core:2.24.2** - The core module of Log4j, implementing the actual logging logic, including log levels, appenders, and configurations.
+- **org.apache.logging.log4j:log4j-slf4j2-impl:2.24.2** - Acts as a bridge between SLF4J and Log4j 2, allowing SLF4J users to leverage Log4j 2 as the underlying logging framework.
+
 ## [0.3.3] - 2024-10-28
 
 ### Fixed

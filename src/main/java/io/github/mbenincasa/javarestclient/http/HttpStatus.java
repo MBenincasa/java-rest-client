@@ -97,4 +97,12 @@ public enum HttpStatus {
                 .findFirst()
                 .orElseThrow();
     }
+
+    @Override
+    public String toString() {
+        return "HttpStatus{" +
+                "value=" + value +
+                ", reasonPhrase='" + reasonPhrase + '\'' +
+                '}';
+    }
 }
